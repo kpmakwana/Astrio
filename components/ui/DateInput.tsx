@@ -18,7 +18,7 @@ export interface DateInputProps {
 }
 
 export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
-  ({ className, label, error, helperText, value, onChange, required, max, id }, ref) => {
+  ({ className, label, error, helperText, value, onChange, required, max, id }, _ref) => {
     const inputId = id || `date-${Math.random().toString(36).substr(2, 9)}`
 
     // Convert string value to Date object

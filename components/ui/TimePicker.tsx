@@ -18,7 +18,7 @@ export interface TimePickerProps {
 export const TimePicker = forwardRef<HTMLInputElement, TimePickerProps>(
   (
     { className, label, error, helperText, value, onChange, required, id },
-    ref
+    _ref
   ) => {
     const inputId = id || `time-${Math.random().toString(36).substr(2, 9)}`;
 
