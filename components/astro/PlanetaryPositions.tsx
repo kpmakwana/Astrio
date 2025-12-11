@@ -15,9 +15,14 @@ export function PlanetaryPositions({ positions }: PlanetaryPositionsProps) {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {positions.map((position) => {
-            const planetInfo = PLANETS[position.planet]
-            const signInfo = ZODIAC_SIGNS[position.sign]
+          {positions
+            .filter((position) => {
+              // Filter out invalid positions
+              return PLANETS[position.planet] && ZODIAC_SIGNS[position.sign]
+            })
+            .map((position) => {
+            const planetInfo = PLANETS[position.planet]!
+            const signInfo = ZODIAC_SIGNS[position.sign]!
             
             return (
               <div

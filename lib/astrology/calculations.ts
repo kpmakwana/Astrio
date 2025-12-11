@@ -23,7 +23,14 @@ import { DASHA_ORDER, DASHA_DURATIONS, NAKSHATRAS } from '../constants'
  * Calculate zodiac sign from degree (0-360)
  */
 export function getZodiacSign(degree: number): ZodiacSign {
-  const signIndex = Math.floor(degree / 30)
+  // Ensure degree is a valid number
+  if (isNaN(degree) || !isFinite(degree)) {
+    return 'aries' // Default fallback
+  }
+  
+  // Normalize degree to 0-360 range
+  const normalizedDegree = ((degree % 360) + 360) % 360
+  const signIndex = Math.floor(normalizedDegree / 30)
   const signs: ZodiacSign[] = [
     'aries',
     'taurus',
@@ -88,10 +95,14 @@ export function calculatePlanetaryPositions(
     const baseDegrees = [0, 30, 60, 90, 120, 150, 180, 210, 240]
     const degree = (baseDegrees[index] + baseTime * rates[index]) % 360
     
+    // Ensure degree is valid
+    const validDegree = isNaN(degree) || !isFinite(degree) ? 0 : degree
+    const sign = getZodiacSign(validDegree)
+    
     return {
       planet,
-      sign: getZodiacSign(degree),
-      degree: degree,
+      sign,
+      degree: validDegree,
       house: 1 as House, // Will be recalculated after ascendant
       nakshatra: '',
       nakshatraLord: 'sun',
