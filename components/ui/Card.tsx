@@ -17,7 +17,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={cn(
-          'rounded-xl p-4 sm:p-6 transition-shadow',
+          'rounded-xl p-4 sm:p-6 transition-shadow bg-white',
           variants[variant],
           className
         )}
@@ -35,7 +35,7 @@ export const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn('mb-4', className)}
+      className={cn('mb-4 sm:mb-6', className)}
       {...props}
     />
   )
@@ -46,7 +46,7 @@ export const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttribut
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn('text-2xl font-bold text-gray-900', className)}
+      className={cn('text-xl sm:text-2xl font-bold text-gray-900', className)}
       {...props}
     />
   )
