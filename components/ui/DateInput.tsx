@@ -1,45 +1,50 @@
-'use client'
+"use client";
 
-import React, { forwardRef, useState } from 'react'
-import DatePicker from 'react-datepicker'
-import { cn } from '@/lib/utils/cn'
-import 'react-datepicker/dist/react-datepicker.css'
+import "react-datepicker/dist/react-datepicker.css";
+
+import React, { forwardRef, useState } from "react";
+
+import DatePicker from "react-datepicker";
+import { cn } from "@/lib/utils/cn";
 
 export interface DateInputProps {
-  label?: string
-  error?: string
-  helperText?: string
-  value?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  required?: boolean
-  max?: string
-  className?: string
-  id?: string
+  label?: string;
+  error?: string;
+  helperText?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  max?: string;
+  className?: string;
+  id?: string;
 }
 
 export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
-  ({ className, label, error, helperText, value, onChange, required, max, id }, _ref) => {
-    const inputId = id || `date-${Math.random().toString(36).substr(2, 9)}`
+  (
+    { className, label, error, helperText, value, onChange, required, max, id },
+    _ref
+  ) => {
+    const inputId = id || `date-${Math.random().toString(36).substr(2, 9)}`;
 
     // Convert string value to Date object
     const [selectedDate, setSelectedDate] = useState<Date | null>(
       value ? new Date(value) : null
-    )
+    );
 
     const handleDateChange = (date: Date | null) => {
-      setSelectedDate(date)
+      setSelectedDate(date);
       if (onChange && date) {
         // Convert Date to ISO string format for form
-        const isoString = date.toISOString().split('T')[0]
+        const isoString = date.toISOString().split("T")[0];
         const syntheticEvent = {
           target: { value: isoString },
           currentTarget: { value: isoString },
-        } as React.ChangeEvent<HTMLInputElement>
-        onChange(syntheticEvent)
+        } as React.ChangeEvent<HTMLInputElement>;
+        onChange(syntheticEvent);
       }
-    }
+    };
 
-    const maxDate = max ? new Date(max) : new Date()
+    const maxDate = max ? new Date(max) : new Date();
 
     return (
       <div className="w-full">
@@ -49,7 +54,9 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
             className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
             {label}
-            {required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
+            {required && (
+              <span className="text-red-500 dark:text-red-400 ml-1">*</span>
+            )}
           </label>
         )}
         <div className="relative">
@@ -81,16 +88,16 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
             dropdownMode="select"
             placeholderText="Select your birth date"
             className={cn(
-              'w-full pl-11 pr-4 py-3 sm:py-2.5 rounded-lg border transition-all text-base',
-              'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100',
-              'placeholder:text-gray-400 dark:placeholder:text-gray-500',
-              'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
-              'hover:border-gray-400 dark:hover:border-gray-500',
-              'disabled:bg-gray-100 dark:disabled:bg-gray-900 disabled:cursor-not-allowed',
-              'touch-manipulation cursor-pointer',
+              "w-full pl-11 pr-4 py-3 sm:py-2.5 rounded-lg border transition-all text-base",
+              "bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100",
+              "placeholder:text-gray-400 dark:placeholder:text-gray-500",
+              "focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent",
+              "hover:border-gray-400 dark:hover:border-gray-500",
+              "disabled:bg-gray-100 dark:disabled:bg-gray-900 disabled:cursor-not-allowed",
+              "touch-manipulation cursor-pointer",
               error
-                ? 'border-red-500 dark:border-red-400 focus:ring-red-500'
-                : 'border-gray-300 dark:border-gray-600',
+                ? "border-red-500 dark:border-red-400 focus:ring-red-500"
+                : "border-gray-300 dark:border-gray-600",
               className
             )}
             wrapperClassName="w-full"
@@ -99,12 +106,19 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
         </div>
 
         {error && (
-          <p id={`${inputId}-error`} className="mt-1.5 text-sm text-red-600 dark:text-red-400" role="alert">
+          <p
+            id={`${inputId}-error`}
+            className="mt-1.5 text-sm text-red-600 dark:text-red-400"
+            role="alert"
+          >
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p id={`${inputId}-helper`} className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
+          <p
+            id={`${inputId}-helper`}
+            className="mt-1.5 text-sm text-gray-500 dark:text-gray-400"
+          >
             {helperText}
           </p>
         )}
@@ -123,7 +137,8 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
             font-family: inherit;
             border: 1px solid rgb(229, 231, 235);
             border-radius: 12px;
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+              0 4px 6px -4px rgb(0 0 0 / 0.1);
             background: white;
           }
 
@@ -133,14 +148,22 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           }
 
           .react-datepicker__header {
-            background: linear-gradient(to bottom, rgb(249, 250, 251), rgb(243, 244, 246));
+            background: linear-gradient(
+              to bottom,
+              rgb(249, 250, 251),
+              rgb(243, 244, 246)
+            );
             border-bottom: 1px solid rgb(229, 231, 235);
             border-radius: 12px 12px 0 0;
             padding-top: 12px;
           }
 
           .dark .react-datepicker__header {
-            background: linear-gradient(to bottom, rgb(55, 65, 81), rgb(31, 41, 55));
+            background: linear-gradient(
+              to bottom,
+              rgb(55, 65, 81),
+              rgb(31, 41, 55)
+            );
             border-bottom-color: rgb(75, 85, 99);
           }
 
@@ -192,7 +215,11 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           }
 
           .react-datepicker__day--selected {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            background: linear-gradient(
+              135deg,
+              #667eea 0%,
+              #764ba2 100%
+            ) !important;
             color: white !important;
             font-weight: 600;
             transform: scale(1.05);
@@ -310,8 +337,8 @@ export const DateInput = forwardRef<HTMLInputElement, DateInputProps>(
           }
         `}</style>
       </div>
-    )
+    );
   }
-)
+);
 
-DateInput.displayName = 'DateInput'
+DateInput.displayName = "DateInput";
