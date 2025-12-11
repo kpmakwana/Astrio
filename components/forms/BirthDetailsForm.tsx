@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
+import { CustomDatePicker } from '@/components/ui/DatePicker'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { birthDetailsSchema, type BirthDetailsFormInput } from '@/lib/utils/validation'
@@ -89,13 +90,6 @@ export function BirthDetailsForm({ onSubmit, isLoading }: BirthDetailsFormProps)
     { value: 'other', label: 'Other' },
   ]
 
-  // Format date for display
-  const formatDateDisplay = (dateString: string) => {
-    if (!dateString) return ''
-    const date = new Date(dateString)
-    return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
-  }
-  
   return (
     <Card className="shadow-lg border-0">
       <CardHeader className="text-center pb-4 sm:pb-6">
@@ -126,53 +120,15 @@ export function BirthDetailsForm({ onSubmit, isLoading }: BirthDetailsFormProps)
           
           {/* Date and Time of Birth */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-            <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                Date of Birth <span className="text-red-500">*</span>
-              </label>
-              <div className="relative">
-                <input
-                  type="date"
-                  value={formData.dateOfBirth}
-                  onChange={(e) => handleChange('dateOfBirth', e.target.value)}
-                  max={new Date().toISOString().split('T')[0]}
-                  className={`
-                    w-full px-4 py-3 sm:py-2.5 rounded-lg border transition-colors text-base
-                    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
-                    ${errors.dateOfBirth
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'border-gray-300 hover:border-gray-400'
-                    }
-                    touch-manipulation
-                    [&::-webkit-calendar-picker-indicator]:absolute
-                    [&::-webkit-calendar-picker-indicator]:right-3
-                    [&::-webkit-calendar-picker-indicator]:w-5
-                    [&::-webkit-calendar-picker-indicator]:h-5
-                    [&::-webkit-calendar-picker-indicator]:cursor-pointer
-                    [&::-webkit-calendar-picker-indicator]:opacity-60
-                    [&::-webkit-calendar-picker-indicator]:hover:opacity-100
-                  `}
-                  aria-invalid={errors.dateOfBirth ? 'true' : 'false'}
-                />
-                {!formData.dateOfBirth && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                )}
-              </div>
-              {errors.dateOfBirth && (
-                <p className="mt-1.5 text-sm text-red-600" role="alert">
-                  {errors.dateOfBirth}
-                </p>
-              )}
-              {formData.dateOfBirth && !errors.dateOfBirth && (
-                <p className="mt-1.5 text-sm text-gray-500">
-                  Selected: {formatDateDisplay(formData.dateOfBirth)}
-                </p>
-              )}
-            </div>
+            <CustomDatePicker
+              label="Date of Birth"
+              value={formData.dateOfBirth}
+              onChange={(date) => handleChange('dateOfBirth', date)}
+              error={errors.dateOfBirth}
+              required
+              maxDate={new Date()}
+              placeholder="Select your birth date"
+            />
             
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-1.5">
