@@ -116,21 +116,17 @@ export default function DashboardPage() {
   }
   
   return (
-    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
-      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        <div className="mb-6 sm:mb-8 text-center px-2">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-            Generate Your Astrology Report
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600">
-            Enter your birth details to receive personalized yearly predictions
-          </p>
-        </div>
-        
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/30 py-6 sm:py-8 md:py-12">
+      <div className="container mx-auto px-4 sm:px-6 max-w-2xl">
         {error && (
-          <Card className="mb-6 border-red-300 bg-red-50">
+          <Card className="mb-6 border-red-300 bg-red-50 shadow-md">
             <CardContent className="pt-6">
-              <p className="text-red-700">{error}</p>
+              <div className="flex items-start gap-3">
+                <svg className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-red-700 text-sm sm:text-base">{error}</p>
+              </div>
             </CardContent>
           </Card>
         )}

@@ -88,117 +88,216 @@ export function BirthDetailsForm({ onSubmit, isLoading }: BirthDetailsFormProps)
     { value: 'female', label: 'Female' },
     { value: 'other', label: 'Other' },
   ]
+
+  // Format date for display
+  const formatDateDisplay = (dateString: string) => {
+    if (!dateString) return ''
+    const date = new Date(dateString)
+    return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })
+  }
   
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Birth Details</CardTitle>
-        <CardDescription>
+    <Card className="shadow-lg border-0">
+      <CardHeader className="text-center pb-4 sm:pb-6">
+        <div className="mb-3">
+          <span className="text-4xl sm:text-5xl">✨</span>
+        </div>
+        <CardTitle className="text-2xl sm:text-3xl font-bold text-gray-900">
+          Birth Details
+        </CardTitle>
+        <CardDescription className="text-base sm:text-lg mt-2 max-w-md mx-auto">
           Enter your birth information to generate your personalized astrology report
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
-          <Input
-            label="Full Name"
-            value={formData.name}
-            onChange={(e) => handleChange('name', e.target.value)}
-            error={errors.name}
-            required
-            placeholder="Enter your full name"
-          />
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Full Name */}
+          <div>
             <Input
-              label="Date of Birth"
-              type="date"
-              value={formData.dateOfBirth}
-              onChange={(e) => handleChange('dateOfBirth', e.target.value)}
-              error={errors.dateOfBirth}
+              label="Full Name"
+              value={formData.name}
+              onChange={(e) => handleChange('name', e.target.value)}
+              error={errors.name}
               required
-              max={new Date().toISOString().split('T')[0]}
-            />
-            
-            <Input
-              label="Time of Birth"
-              type="time"
-              value={formData.timeOfBirth}
-              onChange={(e) => handleChange('timeOfBirth', e.target.value)}
-              error={errors.timeOfBirth}
-              required
-              helperText="24-hour format (HH:mm)"
+              placeholder="Enter your full name"
+              className="text-base"
             />
           </div>
           
-          <Select
-            label="Place of Birth"
-            options={[{ value: '', label: 'Select a city' }, ...cityOptions]}
-            value={selectedCity}
-            onChange={(e) => handleCityChange(e.target.value)}
-            error={errors.placeOfBirth}
-            required
-          />
-          
-          {selectedCity && (
-            <div className="p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-sm text-blue-800 leading-relaxed">
-                <strong>Selected:</strong> {formData.placeOfBirth}
-                <br />
-                <strong>Coordinates:</strong> {formData.latitude}, {formData.longitude}
-                <br />
-                <strong>Timezone:</strong> {formData.timezone}
-              </p>
+          {/* Date and Time of Birth */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Date of Birth <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="date"
+                  value={formData.dateOfBirth}
+                  onChange={(e) => handleChange('dateOfBirth', e.target.value)}
+                  max={new Date().toISOString().split('T')[0]}
+                  className={`
+                    w-full px-4 py-3 sm:py-2.5 rounded-lg border transition-colors text-base
+                    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+                    ${errors.dateOfBirth
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-300 hover:border-gray-400'
+                    }
+                    touch-manipulation
+                    [&::-webkit-calendar-picker-indicator]:absolute
+                    [&::-webkit-calendar-picker-indicator]:right-3
+                    [&::-webkit-calendar-picker-indicator]:w-5
+                    [&::-webkit-calendar-picker-indicator]:h-5
+                    [&::-webkit-calendar-picker-indicator]:cursor-pointer
+                    [&::-webkit-calendar-picker-indicator]:opacity-60
+                    [&::-webkit-calendar-picker-indicator]:hover:opacity-100
+                  `}
+                  aria-invalid={errors.dateOfBirth ? 'true' : 'false'}
+                />
+                {!formData.dateOfBirth && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              {errors.dateOfBirth && (
+                <p className="mt-1.5 text-sm text-red-600" role="alert">
+                  {errors.dateOfBirth}
+                </p>
+              )}
+              {formData.dateOfBirth && !errors.dateOfBirth && (
+                <p className="mt-1.5 text-sm text-gray-500">
+                  Selected: {formatDateDisplay(formData.dateOfBirth)}
+                </p>
+              )}
             </div>
-          )}
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Input
-              label="Latitude"
-              type="number"
-              step="any"
-              value={formData.latitude}
-              onChange={(e) => handleChange('latitude', e.target.value)}
-              error={errors.latitude}
-              required
-              disabled={!!selectedCity}
-              helperText={selectedCity ? 'Auto-filled from city selection' : 'Enter latitude (-90 to 90)'}
-            />
             
-            <Input
-              label="Longitude"
-              type="number"
-              step="any"
-              value={formData.longitude}
-              onChange={(e) => handleChange('longitude', e.target.value)}
-              error={errors.longitude}
+            <div className="relative">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                Time of Birth <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="time"
+                  value={formData.timeOfBirth}
+                  onChange={(e) => handleChange('timeOfBirth', e.target.value)}
+                  className={`
+                    w-full px-4 py-3 sm:py-2.5 rounded-lg border transition-colors text-base
+                    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+                    ${errors.timeOfBirth
+                      ? 'border-red-500 focus:ring-red-500'
+                      : 'border-gray-300 hover:border-gray-400'
+                    }
+                    touch-manipulation
+                    [&::-webkit-calendar-picker-indicator]:absolute
+                    [&::-webkit-calendar-picker-indicator]:right-3
+                    [&::-webkit-calendar-picker-indicator]:w-5
+                    [&::-webkit-calendar-picker-indicator]:h-5
+                    [&::-webkit-calendar-picker-indicator]:cursor-pointer
+                    [&::-webkit-calendar-picker-indicator]:opacity-60
+                    [&::-webkit-calendar-picker-indicator]:hover:opacity-100
+                  `}
+                  aria-invalid={errors.timeOfBirth ? 'true' : 'false'}
+                />
+                {!formData.timeOfBirth && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              {errors.timeOfBirth && (
+                <p className="mt-1.5 text-sm text-red-600" role="alert">
+                  {errors.timeOfBirth}
+                </p>
+              )}
+              {!errors.timeOfBirth && (
+                <p className="mt-1.5 text-sm text-gray-500">
+                  24-hour format (HH:mm)
+                </p>
+              )}
+            </div>
+          </div>
+          
+          {/* Place of Birth */}
+          <div>
+            <Select
+              label="Place of Birth"
+              options={[{ value: '', label: 'Select a city' }, ...cityOptions]}
+              value={selectedCity}
+              onChange={(e) => handleCityChange(e.target.value)}
+              error={errors.placeOfBirth}
               required
-              disabled={!!selectedCity}
-              helperText={selectedCity ? 'Auto-filled from city selection' : 'Enter longitude (-180 to 180)'}
+            />
+            {selectedCity && (
+              <div className="mt-3 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+                <div className="flex items-start gap-2">
+                  <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-blue-900">
+                      {formData.placeOfBirth}
+                    </p>
+                    <p className="text-xs text-blue-700 mt-1">
+                      Coordinates and timezone automatically set
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Gender */}
+          <div>
+            <Select
+              label="Gender"
+              options={genderOptions}
+              value={formData.gender}
+              onChange={(e) => handleChange('gender', e.target.value as Gender)}
+              error={errors.gender}
+              required
             />
           </div>
           
-          <Select
-            label="Gender"
-            options={genderOptions}
-            value={formData.gender}
-            onChange={(e) => handleChange('gender', e.target.value as Gender)}
-            error={errors.gender}
-            required
-          />
+          {/* Hidden fields for lat/long (auto-filled) */}
+          <input type="hidden" name="latitude" value={formData.latitude} />
+          <input type="hidden" name="longitude" value={formData.longitude} />
+          <input type="hidden" name="timezone" value={formData.timezone} />
           
-          <div className="flex justify-end pt-4">
+          {/* Submit Button */}
+          <div className="pt-4 sm:pt-6">
             <Button 
               type="submit" 
               isLoading={isLoading} 
               size="lg"
-              className="w-full sm:w-auto min-h-[52px]"
+              className="w-full min-h-[56px] text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
             >
-              Generate Report
+              {isLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Generating Your Report...
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-2">
+                  <span>✨</span>
+                  Generate Your Report
+                </span>
+              )}
             </Button>
+            <p className="text-xs sm:text-sm text-gray-500 text-center mt-3">
+              Your personalized astrology report will be ready in seconds
+            </p>
           </div>
         </form>
       </CardContent>
     </Card>
   )
 }
-
