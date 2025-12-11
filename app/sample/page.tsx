@@ -1,50 +1,45 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
+import { Header } from '@/components/layout/Header'
 
 export default function SamplePage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
-      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-        <div className="mb-6 sm:mb-8">
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="mb-4">
-              ← Back to Home
-            </Button>
-          </Link>
-        </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <Header />
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl py-4 sm:py-8">
         
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
           <div className="inline-block mb-4">
             <span className="text-4xl sm:text-5xl">✨</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             Your 2026 Future Preview
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 inline-block">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg px-4 py-2 inline-block">
             <strong>Highly Limited Sample</strong> — Only 18% of full insights shown
           </p>
         </div>
 
         {/* Main Preview Card */}
-        <Card className="mb-6 sm:mb-8 bg-gradient-to-br from-purple-50 to-blue-50 border-purple-200">
+        <Card className="mb-6 sm:mb-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/30 dark:to-blue-900/30 border-purple-200 dark:border-purple-800">
           <CardHeader>
-            <CardTitle className="text-xl sm:text-2xl text-center">
+            <CardTitle className="text-xl sm:text-2xl text-center text-gray-900 dark:text-white">
               🔮 2026: A Turning-Point Year is Forming in Your Chart
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-sm sm:text-base leading-relaxed">
-            <p className="text-gray-800">
+            <p className="text-gray-800 dark:text-gray-300">
               Your planetary alignment shows something extremely rare:
               <strong> A 3-phase life-shift pattern that appears only once every 8–12 years in your chart.</strong>
             </p>
-            <p className="text-gray-800">
+            <p className="text-gray-800 dark:text-gray-300">
               This is not a small year.
               <br />
               This is a year of consequences and corrections, where a single decision could move you forward more than the last 3 years combined.
             </p>
-            <p className="text-gray-600 italic">
+            <p className="text-gray-600 dark:text-gray-400 italic">
               And the preview below barely scratches the surface.
             </p>
           </CardContent>
@@ -53,46 +48,46 @@ export default function SamplePage() {
         {/* 3 Shift Signals */}
         <Card className="mb-6 sm:mb-8">
           <CardHeader>
-            <CardTitle className="text-lg sm:text-xl">
+            <CardTitle className="text-lg sm:text-xl text-gray-900 dark:text-white">
               🌟 Your 3 Biggest &quot;Shift Signals&quot; for 2026
             </CardTitle>
-            <p className="text-sm text-gray-600 mt-2">(revealed partially — full decoding locked)</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">(revealed partially — full decoding locked)</p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="border-l-4 border-primary-500 pl-4">
-              <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-base sm:text-lg">
                 1. A pending opportunity from 2023 finally comes back into your life
               </h3>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-2">
+              <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
                 The calculations indicate a re-entry of something — or someone — you once thought was gone forever.
                 This is not random. This is karmic.
               </p>
-              <p className="text-sm sm:text-base font-medium text-primary-700">
+              <p className="text-sm sm:text-base font-medium text-primary-700 dark:text-primary-400">
                 You will be shocked when this happens.
               </p>
             </div>
 
             <div className="border-l-4 border-primary-500 pl-4">
-              <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-base sm:text-lg">
                 2. A strong destiny activation phase between 2 specific months
               </h3>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-2">
+              <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
                 Your chart shows a period where everything aligns — clarity, timing, confidence, and opportunity.
                 This is THE window you must use correctly.
               </p>
-              <p className="text-sm sm:text-base text-gray-600 italic">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic">
                 The exact months are hidden in the full report. Missing this window is the biggest risk of your year.
               </p>
             </div>
 
             <div className="border-l-4 border-primary-500 pl-4">
-              <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-base sm:text-lg">
                 3. A temporary setback in one area that leads to long-term gain
               </h3>
-              <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-2">
+              <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
                 This is not failure. It&apos;s redirection. And ironically, it puts you exactly where you were meant to be.
               </p>
-              <p className="text-sm sm:text-base text-gray-600 italic">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 italic">
                 But the exact date of this event matters more than anything else. The full report reveals the exact timeline + how to avoid unnecessary loss.
               </p>
             </div>

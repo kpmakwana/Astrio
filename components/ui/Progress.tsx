@@ -12,22 +12,22 @@ export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
     const normalizedValue = Math.max(0, Math.min(100, value))
     
     const colorClasses = {
-      primary: 'bg-primary-600',
-      success: 'bg-green-600',
-      warning: 'bg-yellow-600',
-      danger: 'bg-red-600',
+      primary: 'bg-primary-600 dark:bg-primary-500',
+      success: 'bg-green-600 dark:bg-green-500',
+      warning: 'bg-yellow-600 dark:bg-yellow-500',
+      danger: 'bg-red-600 dark:bg-red-500',
     }
-    
+
     return (
       <div ref={ref} className={cn('w-full', className)} {...props}>
         <div className="flex items-center justify-between mb-1">
           {showLabel && (
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {normalizedValue}%
             </span>
           )}
         </div>
-        <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
           <div
             className={cn('h-full transition-all duration-300 ease-out rounded-full', colorClasses[color])}
             style={{ width: `${normalizedValue}%` }}

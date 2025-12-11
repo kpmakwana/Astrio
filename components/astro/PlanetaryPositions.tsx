@@ -27,38 +27,38 @@ export function PlanetaryPositions({ positions }: PlanetaryPositionsProps) {
             return (
               <div
                 key={position.planet}
-                className="p-3 sm:p-4 border border-gray-200 rounded-lg hover:border-primary-300 transition-colors"
+                className="p-3 sm:p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-600 transition-colors bg-white dark:bg-gray-800/50"
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <span className="text-2xl">{planetInfo.symbol}</span>
-                    <span className="font-semibold text-gray-900">
+                    <span className="font-semibold text-gray-900 dark:text-white">
                       {planetInfo.name}
                     </span>
                   </div>
                   {planetInfo.isRetrograde && (
-                    <span className="text-xs bg-red-100 text-red-700 px-2 py-1 rounded">
+                    <span className="text-xs bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 px-2 py-1 rounded">
                       Retrograde
                     </span>
                   )}
                 </div>
                 <div className="space-y-1 text-sm">
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     <span className="font-medium">Sign:</span>{' '}
-                    <span className="text-gray-900">{signInfo.symbol} {signInfo.name}</span>
+                    <span className="text-gray-900 dark:text-white">{signInfo.symbol} {signInfo.name}</span>
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     <span className="font-medium">House:</span>{' '}
-                    <span className="text-gray-900">{position.house}</span>
+                    <span className="text-gray-900 dark:text-white">{position.house}</span>
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     <span className="font-medium">Degree:</span>{' '}
-                    <span className="text-gray-900">{position.degree.toFixed(2)}°</span>
+                    <span className="text-gray-900 dark:text-white">{position.degree.toFixed(2)}°</span>
                   </p>
                   {position.nakshatra && (
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-400">
                       <span className="font-medium">Nakshatra:</span>{' '}
-                      <span className="text-gray-900">{position.nakshatra}</span>
+                      <span className="text-gray-900 dark:text-white">{position.nakshatra}</span>
                     </p>
                   )}
                 </div>

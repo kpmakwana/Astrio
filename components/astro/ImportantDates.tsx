@@ -9,9 +9,9 @@ interface ImportantDatesProps {
 }
 
 const dateTypeStyles = {
-  auspicious: 'bg-green-100 text-green-800 border-green-300',
-  challenging: 'bg-red-100 text-red-800 border-red-300',
-  neutral: 'bg-gray-100 text-gray-800 border-gray-300',
+  auspicious: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-300 dark:border-green-700',
+  challenging: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border-red-300 dark:border-red-700',
+  neutral: 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 border-gray-300 dark:border-gray-600',
 }
 
 export function ImportantDates({ dates }: ImportantDatesProps) {
@@ -36,7 +36,7 @@ export function ImportantDates({ dates }: ImportantDatesProps) {
                     <span className="font-semibold text-sm sm:text-base">
                       {format(date.date, 'MMMM d, yyyy')}
                     </span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-white/50 self-start">
+                    <span className="text-xs px-2 py-0.5 rounded bg-white/50 dark:bg-black/30 self-start">
                       {date.type}
                     </span>
                   </div>

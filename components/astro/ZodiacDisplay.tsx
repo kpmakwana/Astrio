@@ -22,10 +22,10 @@ export function ZodiacDisplay({ sign, title, className }: ZodiacDisplayProps) {
         <div className="flex items-center gap-3 sm:gap-4">
           <div className="text-5xl sm:text-6xl flex-shrink-0">{zodiacInfo.symbol}</div>
           <div className="min-w-0">
-            <p className="text-sm text-gray-600 mb-1">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
               <span className="font-medium">Element:</span> {zodiacInfo.element}
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
               <span className="font-medium">Sign:</span> {zodiacInfo.name}
             </p>
           </div>

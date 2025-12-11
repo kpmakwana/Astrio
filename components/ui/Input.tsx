@@ -16,10 +16,10 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-gray-700 mb-1.5"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
             {label}
-            {props.required && <span className="text-red-500 ml-1">*</span>}
+            {props.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
           </label>
         )}
         <input
@@ -27,12 +27,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           className={cn(
             'w-full px-4 py-3 sm:py-2.5 rounded-lg border transition-colors text-base',
+            'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100',
+            'placeholder:text-gray-400 dark:placeholder:text-gray-500',
             'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent',
-            'disabled:bg-gray-100 disabled:cursor-not-allowed',
+            'disabled:bg-gray-100 dark:disabled:bg-gray-900 disabled:cursor-not-allowed',
             'touch-manipulation',
             error
-              ? 'border-red-500 focus:ring-red-500'
-              : 'border-gray-300 hover:border-gray-400',
+              ? 'border-red-500 dark:border-red-400 focus:ring-red-500'
+              : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500',
             className
           )}
           aria-invalid={error ? 'true' : 'false'}
@@ -40,12 +42,12 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
         />
         {error && (
-          <p id={`${inputId}-error`} className="mt-1.5 text-sm text-red-600" role="alert">
+          <p id={`${inputId}-error`} className="mt-1.5 text-sm text-red-600 dark:text-red-400" role="alert">
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p id={`${inputId}-helper`} className="mt-1.5 text-sm text-gray-500">
+          <p id={`${inputId}-helper`} className="mt-1.5 text-sm text-gray-500 dark:text-gray-400">
             {helperText}
           </p>
         )}
